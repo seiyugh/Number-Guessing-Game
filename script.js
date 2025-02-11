@@ -18,8 +18,9 @@ generate.addEventListener("click", function () {
   showSpinner();
   setTimeout(() => {
     hideSpinner();
-
     guess.textContent = "New number generated! You have 5 attempts!";
+    guessField.disabled = false;
+    guessSubmit.disabled = false;
   }, 1000);
 
   numberGenerated = Math.floor(Math.random() * 100) + 1;
@@ -27,8 +28,6 @@ generate.addEventListener("click", function () {
 
   attemptsLeft.textContent = attempts;
   historyList.innerHTML = "";
-  guessField.disabled = false;
-  guessSubmit.disabled = false;
   guessField.value = "";
   console.log(numberGenerated);
 });
