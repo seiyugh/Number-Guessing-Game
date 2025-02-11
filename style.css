@@ -2,85 +2,131 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: helvetica;
-}
-body {
-  background-color: hsl(0, 0.7%, 28.4%);
-  display: flex;
-  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
 }
 
+body {
+  background-color: #010a13; /* Dark background for a cyberpunk vibe */
+  color: #e600ff; /* Neon pink text */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .container {
-  background-color: hsl(0, 0%, 100%);
-  display: block;
-  width: 90%;
-  margin: 30px 40px;
+  background-color: rgba(230, 0, 255, 0.1); /* Neon pink background */
   padding: 20px;
   text-align: center;
-  border: 2px solid #000;
+  border: 2px solid #e600ff; /* Border in neon pink */
   border-radius: 10px;
-  box-shadow: 5px 5px 5px #000;
+  box-shadow: 0 0 15px #e600ff;
+  position: relative;
+  animation: glitch 1.5s infinite alternate;
+  z-index: 1;
 }
+
+@keyframes glitch {
+  0% {
+    text-shadow: 0 0 10px #e600ff, 0 0 20px #ff00f0; /* Neon pink glow */
+    transform: rotate(1deg);
+  }
+  50% {
+    text-shadow: 0 0 30px #e600ff, 0 0 50px #ff00f0;
+    transform: rotate(-1deg);
+  }
+  100% {
+    text-shadow: 0 0 10px #e600ff, 0 0 20px #ff00f0;
+    transform: rotate(1deg);
+  }
+}
+
 .container h1 {
-  font-size: 2em;
+  font-size: 2.5rem;
   margin-bottom: 20px;
+  letter-spacing: 3px;
+  text-shadow: 0 0 10px #e600ff, 0 0 30px #ff00f0;
 }
+
 .container p {
-  font-size: 1.5em;
+  font-size: 1.5rem;
   margin-bottom: 20px;
+  text-shadow: 0 0 10px #e600ff, 0 0 20px #ff00f0;
 }
-.container label {
-  display: block;
-  font-size: 2em;
-  margin-bottom: 10px;
-  margin-top: 20px;
-}
-.generate {
-  background-color: hsl(238, 100%, 50%);
-  color: hsl(0, 0%, 100%);
+
+.generate, .guessSubmit {
+  background-color: #ff007f; /* Neon pink button */
+  color: #ffffff; /* White text */
   font-size: 1.5em;
   padding: 10px 20px;
-  border: 2px solid #000;
+  border: 2px solid #e600ff;
   border-radius: 10px;
   cursor: pointer;
-  transition: ease-in-out 0.3s;
+  transition: ease-in-out 0.3s, box-shadow 0.3s, transform 0.3s;
+  margin-bottom: 20px;
 }
-.generate:hover {
-  background-color: hsl(238, 100%, 18%);
+
+.generate:hover, .guessSubmit:hover {
+  background-color: #e600ff; /* Neon purple hover effect */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+  transform: scale(1.1); /* Slightly increase button size */
 }
-.generate:active {
-  transform: translateY(2px);
+
+.generate:active, .guessSubmit:active {
+  transform: translateY(2px) scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+/* Pseudo-element for expanding circle effect */
+.generate::after, .guessSubmit::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background-color: #ff007f;
+  transition: all 0.3s ease-in-out;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+}
+
+.generate:hover::after, .guessSubmit:hover::after {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .guessField {
   font-size: 1.5em;
   padding: 10px;
-  border: 2px solid #000;
+  border: 2px solid #e600ff;
   border-radius: 10px;
   width: 50%;
   margin-bottom: 20px;
+  background: rgba(230, 0, 255, 0.2); /* Semi-transparent neon pink background */
+  animation: flicker 1.5s infinite alternate;
 }
-.guessSubmit {
-  background-color: hsl(238, 100%, 50%);
-  color: hsl(0, 0%, 100%);
-  font-size: 1.5em;
-  padding: 10px 20px;
-  border: 2px solid #000;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: ease-in-out 0.3s;
-  margin-bottom: 20px;
+
+@keyframes flicker {
+  0% { background: rgba(230, 0, 255, 0.2); }
+  50% { background: rgba(230, 0, 255, 0.5); }
+  100% { background: rgba(230, 0, 255, 0.2); }
 }
-.guessSubmit:hover {
-  background-color: hsl(238, 100%, 18%);
-}
+
 .guessSubmit:disabled {
-  background-color: hsl(0, 0%, 50%);
-  color: hsl(0, 0%, 100%);
+  background-color: #666; /* Disabled button with darker color */
+  color: #ffffff;
   cursor: not-allowed;
 }
+
 .spinner {
-  display: none; /* Hidden by default */
+  display: none;
   width: 50px;
   height: 50px;
   border: 5px solid #f3f3f3;
@@ -97,4 +143,48 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+/* Flying effects */
+@keyframes fly {
+  0% { top: -50px; left: -50px; }
+  100% { top: 100%; left: 100%; }
+}
+
+.flying-object {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #ff00ff; /* Neon pink flying objects */
+  border-radius: 50%;
+  animation: fly 5s linear infinite;
+  opacity: 0.5;
+  animation-delay: -3s;
+}
+
+/* Random flying objects */
+.flying-object:nth-child(odd) {
+  animation-duration: 6s;
+}
+
+.flying-object:nth-child(even) {
+  animation-duration: 7s;
+}
+
+.container::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(230, 0, 255, 0.1) 2px, transparent 2px); /* Grid in neon pink */
+  background-size: 40px 40px;
+  z-index: -1;
+  animation: moveGrid 10s linear infinite;
+}
+
+@keyframes moveGrid {
+  from { background-position: 0 0; }
+  to { background-position: -200px 200px; }
 }
