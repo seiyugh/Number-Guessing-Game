@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: helvetica;
+}
+body {
+  background-color: hsl(0, 0.7%, 28.4%);
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  background-color: hsl(0, 0%, 100%);
+  display: block;
+  width: 90%;
+  margin: 30px 40px;
+  padding: 20px;
+  text-align: center;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #000;
+}
+.container h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+.container p {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+.container label {
+  display: block;
+  font-size: 2em;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+.generate {
+  background-color: hsl(238, 100%, 50%);
+  color: hsl(0, 0%, 100%);
+  font-size: 1.5em;
+  padding: 10px 20px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: ease-in-out 0.3s;
+}
+.generate:hover {
+  background-color: hsl(238, 100%, 18%);
+}
+.generate:active {
+  transform: translateY(2px);
+}
+
+.guessField {
+  font-size: 1.5em;
+  padding: 10px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.guessSubmit {
+  background-color: hsl(238, 100%, 50%);
+  color: hsl(0, 0%, 100%);
+  font-size: 1.5em;
+  padding: 10px 20px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: ease-in-out 0.3s;
+  margin-bottom: 20px;
+}
+.guessSubmit:hover {
+  background-color: hsl(238, 100%, 18%);
+}
+.guessSubmit:disabled {
+  background-color: hsl(0, 0%, 50%);
+  color: hsl(0, 0%, 100%);
+  cursor: not-allowed;
+}
+.spinner {
+  display: none; /* Hidden by default */
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
